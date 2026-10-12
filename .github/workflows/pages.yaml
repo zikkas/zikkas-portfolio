@@ -28,50 +28,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
-
-      # - name: Install TeX Live
-      #   run: |
-      #     sudo apt-get update
-      #     # We need extra packages for tikz, tcolorbox, and math fonts
-      #     sudo apt-get install -y \
-      #       texlive-latex-base \
-      #       texlive-latex-extra \
-      #       texlive-fonts-recommended \
-      #       texlive-pstricks \
-      #       latexmk
-
-      # - name: Compile LaTeX to PDF
-      #   run: |
-      #     RAW_PATH = $(kpsewhich -var-value=TEXMFLOCAL)
-      #
-      #     sudo unzip -o content/tex-assets/mtp2lite.zip "mtp2lite/texmf/*" -d "$RAW_PATH"
-      #     sudo mv "$RAW_PATH"/mtp2lite/texmf/* $RAW_PATH
-      #     sudo rm -rf "$RAW_PATH"/mtp2lite
-      #
-      #     sudo texhash
-      #
-      #     PROJECT_ROOT=$(pwd)
-      #     export TEXINPUTS=.:$PROJECT_ROOT/content/tex-assets/:
-      #
-      #     find content -name "*.tex" -type f | while read file; do
-      #       dir=$(dirname "$file")
-      #       filename=$(basename "$file")
-      #       echo "Compiling $filename in $dir..."
-      #
-      #       cd "$dir"
-      #
-      #       pdflatex -interaction=nonstopmode "$filename" || true
-      #       pdflatex -interaction=nonstopmode "$filename" || true
-      #
-      #       rm -f *.aux *.log *.out *.toc *.fdb_latexmk *.fls
-      #       cd -
-      #     done
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: "latest"
           extended: true
